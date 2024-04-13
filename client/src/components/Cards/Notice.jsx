@@ -3,12 +3,12 @@ import React from 'react'
 const Notice = () => {
   return (
     <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow m-5">
-      <div class="flex w-full flex-col gap-0.5c bg-blue-100 justify-center py-4 items-center">
-        <h5 class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+      <div className="flex w-full flex-col gap-0.5c bg-blue-100 justify-center py-4 items-center">
+        <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
           Anirban Mondal
         </h5>
 
-        <p class="block font-sans text-base antialiased font-light leading-relaxed text-blue-gray-900">
+        <p className="block font-sans text-base antialiased font-light leading-relaxed text-blue-gray-900">
           HOD. of ECE
         </p>
       </div>
@@ -21,7 +21,7 @@ const Notice = () => {
         </div>
 
         <div className="mx-1">
-          <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+          <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
             "I found solution to all my design needs from Creative Tim. I use
             them as a freelancer in my hobby projects for fun! And its really
             affordable, very humble guys !!!"

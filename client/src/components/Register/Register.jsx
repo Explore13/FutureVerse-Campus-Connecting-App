@@ -57,39 +57,48 @@
 // export default Register;
 
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import {useState} from 'react';
 import "./Register.css";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {register} from "../../redux/slices/AuthSlice.js";
 
 const Register = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
-    const [collegeid, setCollegeID] = useState('');
+    const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('');
     const [department, setDepartment] = useState('');
-    const [mobilenumber, setMobileNumber] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [graduationyear, setGraduationYear] = useState('');
+    const [graduationYear, setGraduationYear] = useState('');
     const [error, setError] = useState('');
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/register', {
-                name,
-                collegeid,
-                email,
-                department,
-                mobilenumber,
-                password,
-                graduationyear
+
+        dispatch(register({
+            userId,
+            name,
+            email,
+            password,
+            department,
+            phNo: mobileNumber,
+            graduationYear,
+        }))
+            .then(() => {
+                navigate('/login');
+            })
+            .catch((error) => {
+                console.error('SignUp failed:', error);
+                setError(error.message)
             });
-            console.log(response.data); // handle success
-            // Redirect to login page after successful registration
-            window.location.href = '/login'; // Adjust the URL as needed
-        } catch (err) {
-            console.error(err.response.data); // handle error
-            setError(err.response.data.error);
-        }
+
     };
 
     return (
@@ -99,14 +108,14 @@ const Register = () => {
                 {error && <div className="error">{error}</div>}
                 <form className="form" onSubmit={handleSubmit}>
                     <input type="text" className="input" name="Name" placeholder="Your Full Name" required
-                        value={name} onChange={(e) => setName(e.target.value)} />
+                           value={name} onChange={(e) => setName(e.target.value)}/>
                     <input type="text" className="input" name="collegeid" placeholder="Class Roll No (e.g., 22ece009)"
-                        pattern="[0-9]{2}[a-zA-Z]{2,4}[0-9]{3}" required
-                        value={collegeid} onChange={(e) => setCollegeID(e.target.value)} />
+                           pattern="[0-9]{2}[a-zA-Z]{2,4}[0-9]{3}" required
+                           value={userId} onChange={(e) => setUserId(e.target.value)}/>
                     <input type="email" className="input" name="email" placeholder="Enter your email" required
-                        value={email} onChange={(e) => setEmail(e.target.value)} />
+                           value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <select className="input" name="department" required
-                        value={department} onChange={(e) => setDepartment(e.target.value)}>
+                            value={department} onChange={(e) => setDepartment(e.target.value)}>
                         <option value="" disabled>Select Department</option>
                         <option value="CSE">CSE</option>
                         <option value="IT">IT</option>
@@ -117,13 +126,13 @@ const Register = () => {
                         {/* Add more departments as needed */}
                     </select>
                     <input type="text" className="input" name="mobilenumber" placeholder="Mobile Number" required
-                        value={mobilenumber} onChange={(e) => setMobileNumber(e.target.value)} />
+                           value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)}/>
                     <input type="password" className="input" name="password" placeholder="Password"
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                        required value={password} onChange={(e) => setPassword(e.target.value)} />
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                           required value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <input type="number" className="input" name="graduationyear" placeholder="Graduation Year" required
-                        value={graduationyear} onChange={(e) => setGraduationYear(e.target.value)} />
+                           value={graduationYear} onChange={(e) => setGraduationYear(e.target.value)}/>
                     <button className="form-btn" type="submit">Sign up</button>
                 </form>
                 <p className="sign-up-label">Have an account?

@@ -2,13 +2,18 @@ const PostModel = require('../models/postSchema');
 const UserModel = require('../models/userSchema');
 
 
+
 exports.createPost = async (req, res) => {
     try {
-        // Extract data from the request body
-        const {title, content, createdBy} = req.body;
+        // Extract JSON payload from the form data
+        const { title, content, createdBy } = req.body;
+        let fileName = ''
+        if(req.file){
+            fileName = req.file.filename;
+        }
 
         // Validate the request data
-        if (!title || !content || !createdBy) {
+        if (!title || !content || !createdBy ) {
             return res.status(400).json({error: 'Missing required fields'});
         }
 
@@ -23,6 +28,7 @@ exports.createPost = async (req, res) => {
             title,
             content,
             createdBy: existingUser._id, // Reference to the user who created the post
+            image: fileName, // Store the image file as binary data
         });
 
         // Save the post to the database
@@ -35,6 +41,7 @@ exports.createPost = async (req, res) => {
         });
     } catch (error) {
         // Handle any errors
+        console.log(error);
         res.status(500).json({
             error: error.message
         });
