@@ -87,7 +87,7 @@ Ensure you have the following installed:
 
      ```bash
      cd client
-     npm start
+     npm run dev
      ```
 
    The backend will run on `http://localhost:4000` and the frontend will run on `http://localhost:5173`.
