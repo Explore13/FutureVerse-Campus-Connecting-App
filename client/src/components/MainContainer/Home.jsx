@@ -1,4 +1,4 @@
-import Market from "../Marketplace/Market";
+import ItemCard from '../Cards/ItemCard'
 import SocialPost from "../Cards/SocialPost";
 import "./Home.css";
 import CreatePost from "../Cards/CreatePost";
@@ -8,18 +8,25 @@ import CreateSell from "../Cards/CreateSell";
 import NoticeForm from "../Notice/NoticeForm";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPosts, selectAllPosts,} from "../../redux/slices/PostSlice.js";
+import {fetchMarkets, selectAllMarkets,} from "../../redux/slices/MarketSlice.js";
+
 import {useEffect, useState} from "react";
 
 function Home() {
     const [showCreatePost, setShowCreatePost] = useState(false);
     const [showCreateSell, setShowCreateSell] = useState(false);
     const [showNoticeForm, setShowNoticeForm] = useState(false);
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchPosts());
+        dispatch(fetchMarkets());
+
     }, []);
 
     const posts = useSelector(selectAllPosts);
+    const markets = useSelector(selectAllMarkets);
+
 
     const toggleCreatePost = () => {
         setShowCreatePost(!showCreatePost);
@@ -45,33 +52,17 @@ function Home() {
                             {!showCreateSell ? "Wanna Sell Something? " : ""}
                         </h3>
                         <button
-                            className={`${!showCreateSell ? "bg-purple-600 text-white font-semibold px-2 py-1 rounded-md hover:bg-purple-700 " : ""}`}
+                            className={`${!showCreateSell ? "bg-purple-600 text-white font-semibold px-2 py-1 rounded-md hover:bg-purple-700 " : "bg-red-700 hover:bg-red-800 px-2 py-1  rounded-md "}`}
                             onClick={toggleCreateSell}>
                             {!showCreateSell ? (
                                 "Click"
-                            ) : (
-                                <svg
-                                    className="w-6 h-6 text-gray-800 dark:text-black"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                    />
-                                </svg>
-                            )}
+                            ) : "Close"
+                            }
                         </button>
                     </div>
-                    {showCreateSell && <CreateSell/>}
-                    <Market/>
+                    {showCreateSell && <CreateSell toggleCreateSell={toggleCreateSell}/>}
+
+                    {markets && markets.map((market) => <ItemCard key={market._id} market={market}/>)}
                 </div>
             </div>
 
@@ -87,7 +78,7 @@ function Home() {
                     </div>
                     {showCreatePost && <CreatePost toggleCreatePost={toggleCreatePost}/>}
 
-                    {posts.map((post) => <SocialPost key={post._id} post={post}/>)}
+                    {posts && posts.map((post) => <SocialPost key={post._id} post={post}/>)}
                 </div>
             </div>
 

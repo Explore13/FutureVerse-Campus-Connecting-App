@@ -5,7 +5,8 @@ const SocialPost = ({post}) => {
 
   return (
     <div className="max-w-2xl w-full bg-white shadow-lg rounded-lg overflow-hidden mx-auto my-4">
-    <div className="flex items-center justify-between px-4 py-2 bg-gray-800">
+    <div className="flex items-center justify-between
+     px-4 py-2 bg-gray-800">
       <div className="flex items-center">
         <img
           className="w-8 h-8 rounded-full mr-2"
@@ -22,7 +23,7 @@ const SocialPost = ({post}) => {
       alt="Post"
     />
     <div className="p-4">
-      <h2 className="font-bold text-xl">{post.title}</h2>
+      <h2 className="font-bold text-xl">{post. title}</h2>
       <p className="text-gray-800">{post.content}</p>
     </div>
   </div>

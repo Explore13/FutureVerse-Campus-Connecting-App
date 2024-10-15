@@ -5,6 +5,8 @@ const cors = require('cors');
 const userRouter = require('./routes/userRoutes');
 const postRouter = require('./routes/postRoutes');
 const authRouter = require('./routes/authRoutes');
+const marketRouter = require('./routes/marketRoutes');
+
 
 const app = express();
 
@@ -15,6 +17,8 @@ if (process.env.NODE_ENV === 'development') {
 
 //2) Middleware to parse JSON bodies
 app.use(express.static(`${__dirname}/public/uploads`));
+app.use(express.static(`${__dirname}/public/products`));
+
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
@@ -27,6 +31,8 @@ app.use((req, res, next) => {
 app.use('/api/v1', userRouter);
 app.use('/api/v1', postRouter);
 app.use('/api/v1', authRouter);
+app.use('/api/v1', marketRouter);
+
 
 
 //4) For all UNHANDLED ROUTES

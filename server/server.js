@@ -6,13 +6,13 @@ const mongoose = require('mongoose');
 
 
 // CONNECT TO DB
-const mongoDB = process.env.DATABASE.replace(
-    '<password>',
-    process.env.DATABASE_PASSWORD
-);
+// const mongoDB = .replace(
+//     '<password>',
+//     process.env.DATABASE_PASSWORD
+// );
 
 mongoose
-    .connect(mongoDB)
+    .connect(process.env.DATABASE)
     .then(() => {
         //console.log(conn.connections);
         console.log('DB connection successful ✔✔✔');
