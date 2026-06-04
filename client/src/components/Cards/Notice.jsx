@@ -16,22 +16,21 @@ const Notice = () => {
       <div className="px-5 pb-5">
         <div className=" my-3 mx-1">
           <h5 className="text-lg font-semibold tracking-tight text-gray-900">
-            Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
+          PUJA HOLIDAYS (Revised)
           </h5>
         </div>
 
         <div className="mx-1">
           <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
-            "I found solution to all my design needs from Creative Tim. I use
-            them as a freelancer in my hobby projects for fun! And its really
-            affordable, very humble guys !!!"
+          " Team Future" will remain closed with effect from 09th Oct 24 to 17th October 24 on the account of Dugapuja & Laxmi Puja, except on emergency like JELET counseling scheduled to be held on / from 13th to 20th October 24. Admin and Accounts departments will detail the requisite manpower for the admission related work of the allotted students.
+
           </p>
         </div>
 
         <div className="flex items-center mx-1 mt-2.5 mb-5">
           {/* Rating stars code */}
           <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-            Posted on (11-04-2023), Thursday
+            Posted on (08.10.2024), Tuesday
           </span>
         </div>
         <div className="flex items-center justify-center">
